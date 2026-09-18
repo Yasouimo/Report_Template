@@ -74,6 +74,58 @@ The PDF (`main.pdf`) is generated in the project root.
 
 ---
 
+## 📂 4. Project Structure
+
+```text
+Rapport_PFE/
+│
+├── .vscode/
+│   └── settings.json
+│
+├── annexes/
+│   └── annexes.tex
+│
+├── arabic abstract page/
+│   └── abstract_arabic.pdf
+│
+├── chapitres/
+│   ├── introduction.tex
+│   ├── chapitre1.tex
+│   ├── chapitre2.tex
+│   ├── chapitre3.tex
+│   ├── chapitre4.tex
+│   ├── conclusion.tex
+│   └── perspectives.tex
+│
+├── docs/
+│   ├── Cegelec_logo.png
+│   ├── Logo_Vinci_Energies.jpg
+│   ├── logo.png
+│   ├── mulakhas.png
+│   └── page_2_only.pdf
+│
+├── listes/
+│   ├── abreviations.tex
+│   ├── figures.tex
+│   ├── glossaire.tex
+│   ├── table_des_matieres.tex
+│   └── tableaux.tex
+│
+├── preliminaires/
+│   ├── dedicace.tex
+│   ├── remerciements.tex
+│   └── resumes.tex
+│
+├── references/
+│   ├── bibliographie.tex
+│   └── webographie.tex
+│
+├── .gitignore
+├── .latexmkrc
+├── README.md
+├── main.pdf
+└── main.tex
+
 ⚠️ **Important:**
 
 - The `build/` folder contains only temporary compilation files and is **ignored by Git**
