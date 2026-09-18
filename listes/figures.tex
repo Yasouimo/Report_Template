@@ -1,0 +1,18 @@
+% make plain pages show only page number (no header)
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\thepage}%
+    \renewcommand{\headrulewidth}{0pt}%
+}
+\pagestyle{fancy}
+
+% Désactiver temporairement la mise en majuscules automatique
+\begingroup
+    \let\MakeUppercase\relax
+    \listoffigures
+\endgroup
+
+\addcontentsline{toc}{chapter}{Liste des figures}
+% Ensure header keeps normal case (set after \listoffigures which resets marks)
+\markboth{Liste des figures}{Liste des figures}
+\afterpage{\pagestyle{plain}}

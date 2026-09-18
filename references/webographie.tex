@@ -1,0 +1,16 @@
+% Start Webographie on a fresh page so TOC records correct page number
+\clearpage
+\addcontentsline{toc}{chapter}{Webographie}
+\renewcommand{\bibname}{Webographie}
+\begin{thebibliography}{99}
+% ensure first webography page uses no-header style
+\pagestyle{noheaderpagenum}
+\thispagestyle{noheaderpagenum}
+    \setcounter{enumiv}{\value{lastbibitem}}
+    
+    \bibitem{ms_azure_openai}
+    Microsoft Azure. (2026). \textit{Data Protection Addendum (DPA) et confidentialité des données sur Azure OpenAI}. Consulté sur \url{https://learn.microsoft.com/fr-fr/legal/cognitive-services/openai/data-privacy}
+
+\end{thebibliography}
+% Restore normal headers after webography
+\pagestyle{fancy}

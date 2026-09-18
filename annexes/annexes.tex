@@ -1,0 +1,32 @@
+% --- ANNEXES ---
+\newpage
+\appendix
+% Use uppercase Roman numerals for annex page numbers
+\clearpage
+\pagenumbering{Roman}% I, II, III, ...
+\setcounter{page}{1}
+\addcontentsline{toc}{chapter}{Annexes}
+\chapter*{Annexes} 
+\thispagestyle{noheaderpagenum}
+\markboth{Annexes}{Annexes}
+\pagestyle{fancy}
+% --- AJOUTEZ CES DEUX LIGNES ICI ---
+\renewcommand{\thesection}{\Alph{section}} % Force les numéros de section en lettres (A, B, C...)
+\setcounter{section}{0} % Initialise le compteur à zéro
+
+% ==========================================
+% ANNEXE A : CODE BACKEND
+% ==========================================
+\refstepcounter{section}
+\addcontentsline{toc}{section}{Annexe A : Implémentation du Backend (Python)}
+\section*{Annexe A : Implémentation du Backend (Python)}
+\label{annexe:backend}
+
+% Configuration du compteur pour afficher Fig. A.1, A.2...
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A.\arabic{figure}}
+
+% --- IMAGE 1 ---
+\vspace{0.5cm}
+\noindent\textbf{\LARGE A.1 - Modélisation et validation des données (Pydantic)}
+\vspace{0.2cm}

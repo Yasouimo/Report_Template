@@ -1,0 +1,333 @@
+﻿\documentclass[12pt, a4paper, twoside]{report}
+
+% ==============================================================
+% 1. PACKAGES
+% ==============================================================
+\usepackage[utf8]{inputenc} 
+\usepackage{afterpage}
+\usepackage{float}
+\usepackage[T1]{fontenc} 
+\usepackage[french]{babel}
+\usepackage{graphicx}    
+\usepackage{ragged2e}   
+\usepackage{longtable}
+%\usepackage{lmodern}
+\usepackage{mathptmx}
+\usepackage{booktabs}
+\usepackage[most]{tcolorbox}
+\usepackage{setspace}
+\usepackage{lipsum} 
+\usepackage{array}
+\usepackage[table]{xcolor}  
+\usepackage{geometry} 
+\usepackage{fancyhdr}
+\usepackage[labelfont=bf,labelsep=colon]{caption}
+\usepackage{titlesec} 
+\usepackage[hyphens]{url}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{booktabs} % Pour les tableaux professionnels (\toprule, \midrule)
+\usepackage{listings} % Pour afficher joliment le code JSON
+\usepackage{xcolor}
+\usepackage{amsmath}
+\makeatletter
+% Replace the default TOC-writing line
+% original: \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}
+\patchcmd{\@chapter}
+  {\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}}
+  {\addcontentsline{toc}{chapter}{Chapitre~\thechapter: #1}}
+  {}{}
+\makeatother
+% Force la puce ronde noire pour tous les itemize
+\setlist[itemize,1]{label={\textcolor{black}{$\bullet$}}}
+
+% Définition d'un gris "très clair" mais lisible
+\definecolor{lightcontent}{gray}{0.5}
+\usepackage[hidelinks]{hyperref} 
+\usepackage{bookmark}
+\usepackage{pdfpages} % Needed for page 2 insertion
+
+%\onehalfspacing
+\setstretch{1.35}
+
+% --- CONFIGURATION DES MARGES ---
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\setlength{\headheight}{16pt}
+\raggedbottom
+
+% --- CHEMIN DES IMAGES ---
+\graphicspath{{./}{images/}{docs/}}
+
+% --- TRADUCTIONS ---
+\addto\captionsfrench{\renewcommand{\listfigurename}{Liste des figures}}
+\addto\captionsfrench{\renewcommand{\listtablename}{Liste des tableaux}}
+\addto\captionsfrench{\renewcommand{\contentsname}{Table des matières}}
+\addto\captionsfrench{\renewcommand{\chaptername}{Chapitre}}
+
+% --- NUMÉROTATION ---
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+
+% --- AJOUTEZ LES DEUX LIGNES ICI ---
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+ 
+% ==============================================================
+% CONFIGURATION DES TITRES (LA SOLUTION ABSOLUE)
+% ==============================================================
+
+% 1. Style pour les Chapitres NUMÉROTÉS (Chapitre 1, 2...)
+\titleformat{\chapter}[display]
+    {\centering\normalfont}
+  {%
+    \rule{0.35\textwidth}{1.5pt}\quad
+    \normalfont\textit{\huge Chapitre \thechapter}\quad
+    \rule{0.35\textwidth}{1.5pt}%
+  }
+  {15pt}
+        {\huge\bfseries}
+  [%
+    \vspace{8pt}%
+    \rule{\textwidth}{0.5pt}%
+    \vspace{20pt}
+  ]
+
+% 2. Style pour les Chapitres NON-NUMÉROTÉS (Résumé, Remerciements, TOC...)
+\titleformat{name=\chapter, numberless}[block]
+    {\centering\normalfont}
+  {}
+  {0pt}
+        {\huge\bfseries}
+  [] 
+
+% Reduce the vertical space above unnumbered chapter titles only
+\titlespacing*{name=\chapter,numberless}
+    {0pt}
+    {-12pt}
+    {18pt}
+
+\let\oldchapter\chapter
+\RenewDocumentCommand{\chapter}{s o m}{%
+    \IfBooleanTF{#1}
+    {\IfNoValueTF{#2}{\oldchapter*{#3}}{\oldchapter*[#2]{#3}}}
+    {\IfNoValueTF{#2}{\oldchapter{#3}}{\oldchapter[#2]{#3}}}%
+}
+
+% --- EN-TÊTES ET PIEDS DE PAGE ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\slshape \leftmark} % Section in the header
+\fancyfoot[C]{\thepage}           % Page number in the footer
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Ensure chapter marks are not forced to uppercase in headers
+\renewcommand{\chaptermark}[1]{\markboth{Chapitre \thechapter: #1}{}}
+
+% Prevent LaTeX from uppercasing marks created by \chapter* and similar
+\makeatletter
+\renewcommand{\@mkboth}[2]{\markboth{#1}{#2}}
+\makeatother
+
+% Style pour les pages de début de chapitre (Plan)
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[L]{\slshape \leftmark}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
+% Style pour afficher uniquement le numéro de page (sans en-tête)
+\fancypagestyle{noheaderpagenum}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+\usepackage{booktabs} % Pour les tableaux professionnels (\toprule, \midrule)
+\usepackage{listings} % Pour afficher joliment le code JSON
+\usepackage{xcolor}
+
+% Configuration optionnelle pour rendre le JSON très beau
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\small,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    morestring=[b]",
+    morecomment=[l]{//},
+    literate=
+     *{:}{{\textcolor{black}{:}}}{1}
+      {,}{{\textcolor{black}{,}}}{1}
+      {\{}{{\textcolor{black}{\{}}}{1}
+      {\}}{{\textcolor{black}{\}}}}{1}
+      {[}{{\textcolor{black}{[}}}{1}
+      {]}{{\textcolor{black}{]}}}{1}
+}
+\lstset{
+    backgroundcolor=\color{gray!5},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{black!30}
+}
+% ==============================================================
+% DÉBUT DU DOCUMENT
+% ==============================================================
+\begin{document}
+
+
+
+% For preliminary pages (title, dedications, prefaces, lists), show only page number
+\pagestyle{noheaderpagenum}
+
+% --------------------------------------------------------------
+% PAGE DE GARDE 
+% --------------------------------------------------------------
+\begin{titlepage}
+
+    \newgeometry{top=2cm, bottom=2cm, left=2cm, right=2cm}
+
+    % --- Logos ---
+    \noindent
+    \begin{minipage}{0.45\textwidth}
+        \raggedright
+        \includegraphics[height=1.8cm]{logo.png}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \raggedleft
+        \includegraphics[
+            height=1.8cm,
+            width=0.9\textwidth,
+            keepaspectratio
+        ]{Logo_Vinci_Energies.jpg}
+    \end{minipage}
+
+    \vspace{1cm}
+
+    % --- En-tête ---
+    \begin{center}
+        \textbf{\Large Projet de Fin d'Études}\\[0.2cm]
+        {\small Présenté}\\[0.1cm]
+        {\small En vue de l'obtention du titre de :}\\[0.2cm]
+        \textbf{\Large Ingénieur d'État Arts et Métiers}\\[0.3cm]
+        \textbf{\large [Intitulé de la spécialité]}
+    \end{center}
+
+    \vspace{0.8cm}
+
+    % --- Sujet ---
+    \begin{center}
+        \textbf{\large Sujet}
+    \end{center}
+
+    \noindent\rule{\textwidth}{2pt}
+
+    \begin{center}
+        \vspace{0.4cm}
+        {\huge \textbf{[Titre du projet]}}\\[0.3cm]
+        {\Large \textbf{[Sous-titre ou description du projet]}}
+        \vspace{0.4cm}
+    \end{center}
+
+    \noindent\rule{\textwidth}{2pt}
+
+    \vspace{0.5cm}
+
+    % --- Date ---
+    \begin{center}
+        \textbf{Soutenu le [JJ] [Mois] [Année]}
+    \end{center}
+
+    \vspace{1cm}
+
+    % --- Étudiants ---
+    \begin{center}
+        \begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}} l l}
+            \textbf{[Nom Prénom]} & \textbf{[Nom Prénom]} \\
+        \end{tabular*}
+    \end{center}
+
+    \vfill
+
+    % --- Jury ---
+    \begin{center}
+        \renewcommand{\arraystretch}{1.4}
+        \begin{tabular}{p{6cm} p{5cm} l}
+            \textbf{[Nom Prénom]} & Président & [Établissement] \\
+            \textbf{[Nom Prénom]} & Encadrant académique & [Établissement] \\
+            \textbf{[Nom Prénom]} & Rapporteur & [Établissement] \\
+            \textbf{[Nom Prénom]} & Examinateur & [Établissement] \\
+            \textbf{[Nom Prénom]} & Encadrant industriel & [Entreprise] \\
+        \end{tabular}
+    \end{center}
+
+\end{titlepage}
+\restoregeometry
+
+% --------------------------------------------------------------
+% PARTIES PRÉLIMINAIRES 
+% --------------------------------------------------------------
+
+% PDF INSERTION (page 2)
+\includepdf{docs/page_2_only.pdf}
+
+\pagenumbering{roman} 
+\setcounter{page}{2}
+\input{preliminaires/dedicace.tex}
+\input{preliminaires/remerciements.tex}
+\input{preliminaires/resumes.tex}
+
+% --- Supprimer les en-têtes pour les listes et la TDM ---
+\pagestyle{plain}
+
+% --- TABLE DES ILLUSTRATIONS ---
+\input{listes/figures.tex}
+
+% --- TABLE DES TABLEAUX ---
+\input{listes/tableaux.tex}
+
+% --- LISTE DES ABRÉVIATIONS ---
+\input{listes/abreviations.tex}
+\input{listes/glossaire.tex}
+\input{listes/table_des_matieres.tex}
+\clearpage
+
+% --- Restaurer les en-têtes pour le corps du rapport ---
+\pagestyle{fancy}
+
+% --------------------------------------------------------------
+% CORPS DU RAPPORT
+% --------------------------------------------------------------
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% --- INTRODUCTION GÉNÉRALE ---
+\input{chapitres/introduction.tex}
+
+% ============================================================== 
+% CHAPITRES PRINCIPAUX
+% ============================================================== 
+\input{chapitres/chapitre1.tex}
+
+\input{chapitres/chapitre2.tex}
+
+\input{chapitres/chapitre3.tex}
+
+\input{chapitres/chapitre4.tex}
+
+\input{chapitres/conclusion.tex}
+
+% --- PERSPECTIVES ---
+%\input{chapitres/perspectives.tex}
+
+\input{references/bibliographie.tex}
+\input{references/webographie.tex}
+\input{annexes/annexes.tex}
+
+\end{document}

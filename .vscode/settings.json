@@ -1,0 +1,65 @@
+{
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.outDir": "./build",
+  "latex-workshop.latex.clean.subfolder.enabled": true,
+  "latex-workshop.latex.clean.method": "glob",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.snm",
+    "*.nav",
+    "*.synctex.gz",
+    "*.vrb",
+    "*.bcf",
+    "*.run.xml"
+  ],
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "pdflatex → move PDF to root",
+      "tools": ["pdflatex-to-build", "pdflatex-to-build", "copy-pdf-to-root"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "pdflatex-to-build",
+      "command": "pdflatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=build",
+        "%DOC%.tex"
+      ]
+    },
+    {
+      "name": "copy-pdf-to-root",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$doc='%DOC%'; $root=Split-Path -Path $doc -Parent; $name=Split-Path -Path $doc -Leaf; $src=Join-Path (Join-Path $root 'build') ($name + '.pdf'); $dest=Join-Path $root ($name + '.pdf'); if (-not (Test-Path -LiteralPath $src)) { Write-Error \"PDF not found: $src\"; exit 1 }; $ok=$false; for ($i=0; $i -lt 10; $i++) { try { Copy-Item -LiteralPath $src -Destination $dest -Force -ErrorAction Stop; $ok=$true; break } catch { Start-Sleep -Milliseconds 250 } }; if (-not $ok) { Write-Error \"Unable to overwrite $dest because it is locked by another process. Close external PDF viewers and rebuild.\"; exit 1 }; exit 0"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.view.pdf.viewer": "tab"
+}

@@ -1,0 +1,20 @@
+\clearpage
+
+% Conserve le dernier numero de reference pour poursuivre dans la Webographie
+\newcounter{lastbibitem}
+
+\addcontentsline{toc}{chapter}{Bibliographie}
+\renewcommand{\bibname}{Bibliographie}
+\begin{thebibliography}{99}
+% ensure first bibliography page uses no-header style
+\pagestyle{noheaderpagenum}
+\thispagestyle{noheaderpagenum}
+
+    \bibitem{womack1996}
+    Womack J. P., Jones D. T., \textit{Lean Thinking: Banish Waste and Create Wealth in Your Corporation}, Simon \& Schuster, 1996.
+
+\end{thebibliography}
+
+\setcounter{lastbibitem}{\value{enumiv}}
+% Restore normal headers after bibliography
+\pagestyle{fancy}

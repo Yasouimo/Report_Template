@@ -1,0 +1,19 @@
+\begingroup
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \fancyfoot[C]{\thepage}%
+    \renewcommand{\headrulewidth}{0pt}%
+}
+\clearpage
+\phantomsection
+% Ensure header keeps normal case
+\addcontentsline{toc}{chapter}{Table des matières}
+% Temporarily disable automatic uppercasing performed by \tableofcontents
+\begingroup
+    \let\MakeUppercase\relax
+    \tableofcontents
+\endgroup
+% Ensure header keeps normal case (set after \tableofcontents which resets marks)
+\markboth{Table des matières}{Table des matières}
+\afterpage{\pagestyle{fancy}} % <-- remet fancy dès la page suivante
+\endgroup

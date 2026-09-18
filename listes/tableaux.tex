@@ -1,0 +1,12 @@
+\begingroup
+    \fancypagestyle{plain}{%
+        \fancyhf{}%
+        \fancyfoot[C]{\thepage}%
+        \renewcommand{\headrulewidth}{0pt}%
+    }
+    \listoftables
+    % Ensure header keeps normal case (set after \listoftables which resets marks)
+    \markboth{Liste des tableaux}{Liste des tableaux}
+    \thispagestyle{plain}
+    \addcontentsline{toc}{chapter}{Liste des tableaux}
+\endgroup
