@@ -73,3 +73,8 @@ Install these extensions:
 The PDF (`main.pdf`) is generated in the project root.
 
 ---
+
+⚠️ **Important:**
+
+- The `build/` folder contains only temporary compilation files and is **ignored by Git**
+- The `main.pdf` is generated in the **root directory**, not in `build/`
