@@ -126,7 +126,21 @@ Rapport_PFE/
 ├── main.pdf
 └── main.tex
 
+## ✍️ How to Use
+
+The report is **modular**: each part is written in its own `.tex` file.
+
+- **`main.tex`** → Master file: packages, formatting, configuration and document structure.
+- **`chapitres/`** → Write the introduction, chapters, conclusion and perspectives.
+- **`preliminaires/`** → Edit dedication, acknowledgements and abstracts.
+- **`listes/`** → Manage table of contents, figures, tables, glossary and abbreviations.
+- **`references/`** → Add bibliography and web references.
+- **`annexes/`** → Add supplementary content.
+- **`docs/`** → Store images, logos and other resources.
+
 ⚠️ **Important:**
 
 - The `build/` folder contains only temporary compilation files and is **ignored by Git**
 - The `main.pdf` is generated in the **root directory**, not in `build/`
+
+
