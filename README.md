@@ -125,6 +125,7 @@ Rapport_PFE/
 ├── README.md
 ├── main.pdf
 └── main.tex
+```
 
 ## ✍️ How to Use
 
