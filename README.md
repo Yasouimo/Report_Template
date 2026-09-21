@@ -1,4 +1,4 @@
-# PFE report Template 
+# PFE report Template  
 
 This repository contains the LaTeX source of a template **Projet de Fin d'Études (PFE)** report.
 
