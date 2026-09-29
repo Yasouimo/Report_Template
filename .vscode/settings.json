@@ -104,25 +104,9 @@
     }
   ],
 
-  // ==============================================================
-  // DEFAULT COMPILER
-  //
-  // Currently: PDFLaTeX
-  //
-  // To use XeLaTeX by default, change:
-  //
-  //   "latex-workshop.latex.recipe.default": "first"
-  //
-  // to:
-  //
-  //   "latex-workshop.latex.recipe.default": "lastUsed"
-  //
-  // Then select "xelatex → move PDF to root" once from:
-  // LaTeX Workshop → Build with recipe
-  //
-  // Or simply keep "first" and manually select the XeLaTeX
-  // recipe whenever you need it.
-  // ==============================================================
+  // "first" = pdflatex (default)
+  // To use xelatex: Ctrl+Shift+P → "LaTeX Workshop: Build with recipe"
+  // then select "xelatex → move PDF to root"
 
   "latex-workshop.latex.recipe.default": "first",
 
