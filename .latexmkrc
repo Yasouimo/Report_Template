@@ -1,4 +1,4 @@
-# LaTeX compilation configuration for latexmk
+# LaTeX compilation configuration for latexmk using pdflatex and xelatex
 
 # Put auxiliary files in build/
 $aux_dir = 'build';
