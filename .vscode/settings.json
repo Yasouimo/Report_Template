@@ -1,4 +1,4 @@
-{ 
+{
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.latex.outDir": "./build",
   "latex-workshop.latex.clean.subfolder.enabled": true,
@@ -31,12 +31,36 @@
   ],
 
   "latex-workshop.latex.recipes": [
+    // ============================================================
+    // DEFAULT RECIPE — PDFLaTeX
+    // ============================================================
     {
       "name": "pdflatex → move PDF to root",
-      "tools": ["pdflatex-to-build", "pdflatex-to-build", "copy-pdf-to-root"]
+      "tools": [
+        "pdflatex-to-build",
+        "pdflatex-to-build",
+        "copy-pdf-to-root"
+      ]
+    },
+
+    // ============================================================
+    // XeLaTeX RECIPE
+    // Use this if you need Unicode / custom system fonts.
+    // ============================================================
+    {
+      "name": "xelatex → move PDF to root",
+      "tools": [
+        "xelatex-to-build",
+        "xelatex-to-build",
+        "copy-pdf-to-root"
+      ]
     }
   ],
+
   "latex-workshop.latex.tools": [
+    // ============================================================
+    // PDFLaTeX
+    // ============================================================
     {
       "name": "pdflatex-to-build",
       "command": "pdflatex",
@@ -48,6 +72,25 @@
         "%DOC%.tex"
       ]
     },
+
+    // ============================================================
+    // XeLaTeX
+    // ============================================================
+    {
+      "name": "xelatex-to-build",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=build",
+        "%DOC%.tex"
+      ]
+    },
+
+    // ============================================================
+    // Copy generated PDF from /build to project root
+    // ============================================================
     {
       "name": "copy-pdf-to-root",
       "command": "powershell",
@@ -60,6 +103,28 @@
       ]
     }
   ],
+
+  // ==============================================================
+  // DEFAULT COMPILER
+  //
+  // Currently: PDFLaTeX
+  //
+  // To use XeLaTeX by default, change:
+  //
+  //   "latex-workshop.latex.recipe.default": "first"
+  //
+  // to:
+  //
+  //   "latex-workshop.latex.recipe.default": "lastUsed"
+  //
+  // Then select "xelatex → move PDF to root" once from:
+  // LaTeX Workshop → Build with recipe
+  //
+  // Or simply keep "first" and manually select the XeLaTeX
+  // recipe whenever you need it.
+  // ==============================================================
+
   "latex-workshop.latex.recipe.default": "first",
+
   "latex-workshop.view.pdf.viewer": "tab"
 }
