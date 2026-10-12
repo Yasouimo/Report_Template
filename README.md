@@ -1,6 +1,6 @@
 # PFE Report Template   
 
-This repository contains the LaTeX source of a template **Projet de Fin d'Études (PFE)**|**End of studies report** report.
+This repository contains the LaTeX source of a template **Projet de Fin d'Études (PFE)** | **End of studies report** report.
 
 The project is managed with **LaTeX + GitHub** and compiled locally using **latexmk**.
 
