@@ -17,8 +17,8 @@ The project is managed with **LaTeX + GitHub** and compiled locally using **late
 ### Option B — Clone with Git (recommended)
 
 ```bash
-git clone https://github.com/Yasouimo/Rapport_PFE.git
-cd Rapport_PFE
+git clone https://github.com/Yasouimo/Report_Template.git
+cd Report_Template
 ```
 
 ---
